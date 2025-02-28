@@ -19,4 +19,4 @@ class UserListSeeder extends Seeder
         for($year = $startYear; $year <= $endYear;  $year++)
         UserList::created(['list_name' => "Gjenerat " .$year ]);
     }
-}
+};
