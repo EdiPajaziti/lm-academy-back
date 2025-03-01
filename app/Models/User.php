@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\UserInfo;
+use App\Models\UserList;
+use App\Models\ScoreBoard;
 
 class User extends Authenticatable
 {
@@ -29,7 +30,6 @@ class User extends Authenticatable
         'academic_year',
         'acc_status',
         'profile_status',
-
     ];
 
     /**
@@ -54,21 +54,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-public function scopeSelectSomeUserData($query) {
-    
-}
- 
+
+    public function scopeSelectSomeUserData($query)
+    {
+        // Add logic here if needed
+    }
+
     public function userInfo()
     {
-        return $this->hasOne(UserInfo::class. 'user_id'. 'id');
+        return $this->hasOne(UserInfo::class, 'user_id', 'id');
     }
- 
+
     public function userLists()
     {
         return $this->belongsToMany(UserList::class, 'user_list', 'user_id', 'list_id');
-
-    public function scoreBoard() 
-    {
-        this->hasOne(ScoreBoard::class, 'user_id', 'id');
-
     }
+
+    public function scoreBoard()
+    {
+        return $this->hasOne(ScoreBoard::class, 'user_id', 'id');
+    }
+}

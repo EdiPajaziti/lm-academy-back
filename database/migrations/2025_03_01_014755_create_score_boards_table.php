@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('score_boards', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->unsignedBigInteger('score')->default(0);
             $table->timestamps();
+
+            $table->index('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -22,15 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::create('scoreboards', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->unsignedBigInteger('score')-default(0);
-            $table->timestamps();
-
-            $table->index('user_id');
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        ) 
+        Schema::dropIfExists('score_boards'); // Correctly dropping the table
     }
 };
