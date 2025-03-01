@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserList extends Model
 {
-    protected $fillable =[
-        'list_name'
-    ]
-}
+    protected $fillable = [ 
+        'list_name',
+    ];
+
+    public function users() {
+        return $this->hasMany(User::class , 'user_list_items', 'list_id', 'user_id')-withtimestamps();
+    }
+};

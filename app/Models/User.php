@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\UserInfo;
 
 class User extends Authenticatable
 {
@@ -53,4 +54,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+public function scopeSelectSomeUserData($query) {
+    
 }
+ 
+    public function userInfo()
+    {
+        return $this->hasOne(UserInfo::class. 'user_id'. 'id');
+    }
+ 
+    public function userLists()
+    {
+        return $this->belongsToMany(UserList::class, 'user_list', 'user_id', 'list_id');
+
+    public function scoreBoard() 
+    {
+        this->hasOne(ScoreBoard::class, 'user_id', 'id');
+
+    }

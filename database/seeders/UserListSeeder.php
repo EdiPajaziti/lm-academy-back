@@ -13,10 +13,12 @@ class UserListSeeder extends Seeder
      */
     public function run(): void
     {
-        $startYear  = 2020;
+        $startYear = 2020;
         $endYear = 2025;
 
-        for($year = $startYear; $year <= $endYear;  $year++)
-        UserList::created(['list_name' => "Gjenerat " .$year ]);
+        for ($year = $startYear; $year <= $endYear; $year++) {
+            // Use create() instead of created()
+            UserList::create(['list_name' => "Gjenerat " . $year]);
+        }
     }
-};
+}
